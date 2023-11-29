@@ -1,0 +1,50 @@
+import React, { useEffect, useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
+import axios from 'axios'
+import { Link } from 'react-router-dom';
+import { MdOutlineUpdate } from "react-icons/md";
+import { MdDelete } from "react-icons/md";
+import { CgDetailsMore } from "react-icons/cg";
+
+const Mylist = () => {
+    const [data,setData]=useState([])
+    const {id}=useParams()
+    const navigate=useNavigate()
+    console.log(data)
+    useEffect(()=>{axios.get(`http://127.0.0.1:8080/books/users/${id}`).then((res)=>{
+      setData(res.data)}).catch((err)=>console.log(err))},[])
+  return (
+        
+          <div className="row row-cols-1 row-cols-md-4 g-4 d-flex ">
+          {
+            
+    data.map((book)=>{ 
+       return (
+      
+    
+      <div className="col">
+     
+    <div className="card"></div>
+      <div  key={book.idbooks } className="card-group">
+      <div className="card ">
+        <img src={book.image} className="card-img-top figure-img img-fluid rounded " />
+        <div className="card-body">
+          <h5 className="card-title">{book.title}</h5>
+          <h5 className="card-title">{book.author}</h5>
+          <p className="card-text">{book.votes}</p>
+          <Link to ={`/books/update/${book.idbooks}`}><MdOutlineUpdate size={50} /></Link>
+          <Link to ={`/books/relation/${book.idbooks}`}><MdDelete size={50} /></Link>
+          <Link to ={`/books/details/${book.idbooks}`} ><CgDetailsMore  size={50}/></Link>
+        </div>
+      </div>
+      </div>
+      </div>
+          )})
+       }
+          </div> 
+      
+      )
+  
+}
+
+export default Mylist

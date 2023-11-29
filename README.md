@@ -1,5 +1,3 @@
 # MVP-starter
-
-Write a description of your project and the key features here.
-
-GOOD LUCK 😄
+in this application , the user can sign in or sign up to its account where he can manage his list of books by adding books to it , he also can share books with other users , rate  or delete them 
+ 😄
